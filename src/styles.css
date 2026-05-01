@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-mode .card {
+  background-color: #1e1e1e;
+  color: white;
+}
+.dark-mode .card img{
+  background-color: transparent !important;
+}
