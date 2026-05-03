@@ -3,6 +3,7 @@ import { Products } from "../products/products";
 import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Icategorys } from '../../Interfaces/categorys/icategorys';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-master-products',
@@ -15,7 +16,7 @@ export class MasterProducts {
   catList:Icategorys[];
   totalPrice:number =0 ;
 
-  constructor(){
+  constructor(private router:Router){
       this.catList = [
   { name: 'all' },
   { name: 'beauty' },
@@ -28,6 +29,11 @@ export class MasterProducts {
 
   RecivedTotalPrice(data:any){
     this.totalPrice =data ;
+  }
+
+  gotoform()
+  {
+    this.router.navigateByUrl('/addproduct');
   }
 
 }

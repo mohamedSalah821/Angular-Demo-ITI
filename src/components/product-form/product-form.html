@@ -1,0 +1,134 @@
+<div class="container my-5">
+    <h1 class="text-center text-primary">  {{ isEdit ? 'Update Product' : 'Add Product' }}</h1>
+
+  <div class="row">
+    <div class="col-6 mx-auto border border-1 border-primary rounded-2 p-3">
+
+      <form (ngSubmit)="submit()" #productForm="ngForm">
+
+        <!-- Product Name -->
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Product Name"
+            required
+            pattern="[A-Za-z ]{3,}"
+            name="title"
+            [(ngModel)]="newProduct.title"
+            #inpName="ngModel"
+          />
+          <label>Product Name</label>
+        </div>
+
+        <div [hidden]="inpName.valid || inpName.untouched">
+          <small *ngIf="inpName.errors?.['required']" class="text-danger">
+            Product Name is Required
+          </small>
+          <small *ngIf="inpName.errors?.['pattern']" class="text-danger">
+            Must be letters only (min 3 chars)
+          </small>
+        </div>
+
+        <!-- Price -->
+        <div class="form-floating mb-3">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Price"
+            required
+            min="1"
+            name="price"
+            [(ngModel)]="newProduct.price"
+            #inpPrice="ngModel"
+          />
+          <label>Price</label>
+        </div>
+
+        <div [hidden]="inpPrice.valid || inpPrice.untouched">
+          <small *ngIf="inpPrice.errors?.['required']" class="text-danger">
+            Price is Required
+          </small>
+          <small *ngIf="inpPrice.errors?.['min']" class="text-danger">
+            Price must be greater than 0
+          </small>
+        </div>
+
+        <!-- Category -->
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Category"
+            required
+            name="category"
+            [(ngModel)]="newProduct.category"
+            #inpCat="ngModel"
+          />
+          <label>Category</label>
+        </div>
+
+        <div [hidden]="inpCat.valid || inpCat.untouched">
+          <small class="text-danger">
+            Category is Required
+          </small>
+        </div>
+
+        <!-- Stock -->
+        <div class="form-floating mb-3">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Stock"
+            required
+            min="0"
+            name="stock"
+            [(ngModel)]="newProduct.stock"
+            #inpStock="ngModel"
+          />
+          <label>Stock</label>
+        </div>
+
+        <div [hidden]="inpStock.valid || inpStock.untouched">
+          <small class="text-danger">
+            Stock must be 0 or more
+          </small>
+        </div>
+
+        <!-- Description -->
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            placeholder="Description"
+            required
+            minlength="10"
+            name="description"
+            [(ngModel)]="newProduct.description"
+            #inpDesc="ngModel"
+            style="height: 100px"
+          ></textarea>
+          <label>Description</label>
+        </div>
+
+        <div [hidden]="inpDesc.valid || inpDesc.untouched">
+          <small class="text-danger">
+            Description must be at least 10 characters
+          </small>
+        </div>
+
+        
+
+        <!-- Submit -->
+        <button
+  class="btn btn-primary w-100 mt-3"
+  [disabled]="productForm.invalid"
+>
+  {{ isEdit ? 'Update Product' : 'Add Product' }}
+</button>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>

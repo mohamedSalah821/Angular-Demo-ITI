@@ -1,0 +1,53 @@
+<section class="hero text-center py-5">
+  <span class="badge-custom">✦ New arrivals every week</span>
+  <h1 class="display-4 fw-bold mt-3">
+    Shop smarter, live <span class="text-primary">better.</span>
+  </h1>
+  <p class="lead text-muted mt-3 mx-auto" style="max-width: 460px;">
+    اكتشف آلاف المنتجات المختارة بعناية — من الإلكترونيات إلى الأزياء، كل شيء بسعر يناسبك.
+  </p>
+  <div class="d-flex gap-3 justify-content-center mt-4 flex-wrap">
+    <a routerLink="/master" class="btn btn-primary btn-lg rounded-pill px-4">تسوق الآن →</a>
+    <a routerLink="/master" class="btn btn-outline-secondary btn-lg rounded-pill px-4">اكتشف العروض</a>
+  </div>
+
+  <div class="d-flex gap-5 justify-content-center mt-5 flex-wrap">
+    <div>
+      <div class="fs-3 fw-bold">+100</div>
+      <small class="text-muted">منتج متاح</small>
+    </div>
+    <div class="vr"></div>
+    <div>
+      <div class="fs-3 fw-bold">30</div>
+      <small class="text-muted">فئة مختلفة</small>
+    </div>
+    <div class="vr"></div>
+    <div>
+      <div class="fs-3 fw-bold">⭐ 4.8</div>
+      <small class="text-muted">تقييم العملاء</small>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="bg-light py-5">
+  <h2 class="text-center fw-bold mb-4">ليه تختارنا؟</h2>
+  <div class="container">
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-3" *ngFor="let f of features">
+        <div class="card text-center h-100 border-0 shadow-sm p-3">
+          <div class="fs-1">{{ f.icon }}</div>
+          <h5 class="mt-2 fw-semibold">{{ f.title }}</h5>
+          <p class="text-muted small">{{ f.desc }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="text-center py-5">
+  <h2 class="fw-bold">مستني إيه؟ 🛍️</h2>
+  <p class="text-muted">أكتر من 100 منتج بانتظارك</p>
+  <a routerLink="/master" class="btn btn-primary btn-lg rounded-pill px-5">ابدأ التسوق</a>
+</section>

@@ -2,3 +2,21 @@
   height: 600px;
 }
 
+button.btn-danger {
+  opacity: 0.8;
+  transition: 0.2s;
+}
+
+.card:hover button.btn-danger {
+  opacity: 1;
+  transform: scale(1.1);
+}
+button.btn-warning {
+  opacity: 0.8;
+  transition: 0.2s;
+}
+
+.card:hover button.btn-warning {
+  opacity: 1;
+  transform: scale(1.1);
+}
