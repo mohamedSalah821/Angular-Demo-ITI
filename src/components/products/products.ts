@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Iproducts } from '../../Interfaces/products/iproducts';
 import { CurrencyPipe, SlicePipe, TitleCasePipe, NgStyle, NgClass } from '@angular/common';
 import { FirstWordsPipePipe } from '../../pipes/first-words-pipe-pipe';
@@ -7,21 +7,35 @@ import { DarkModeDirective } from "../../directives/dark-mode-directive";
 import { Icategorys } from '../../Interfaces/categorys/icategorys';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Button } from "../button/button";
 
 @Component({
   selector: 'app-products',
-  imports: [CurrencyPipe, FirstWordsPipePipe, TitleCasePipe, Zooming, DarkModeDirective, FormsModule, NgClass],
+  imports: [CurrencyPipe, FirstWordsPipePipe, Zooming, DarkModeDirective, FormsModule, NgClass, Button],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
-export class Products {
-    productList:Iproducts[];
-    filterList:Iproducts[];
-    catList:Icategorys[];
+export class Products  implements OnChanges ,OnInit{
+    productList:Iproducts[]=[];
+    filterList:Iproducts[]=[];
+    // catList:Icategorys[];
     selectedName :string ; 
     totalPrice:number;
+    //-------------------------------------------------------------
+    @Input()RecivedName:string = '' ;
+    @Output() total= new EventEmitter<Number>();
+    //-------------------------------------------------------------
 
 constructor(private toastr:ToastrService) {
+
+
+
+
+this.totalPrice=0;
+this.selectedName='all';
+
+}
+  ngOnInit(): void {
   this.productList = [
     {
       id: 1,
@@ -329,20 +343,13 @@ constructor(private toastr:ToastrService) {
       thumbnail: "https://cdn.dummyjson.com/product-images/groceries/kiwi/thumbnail.webp"
     }
   ];
-
-  this.catList = [
-  { name: 'all' },
-  { name: 'beauty' },
-  { name: 'fragrances' },
-  { name: 'furniture' },
-  { name: 'groceries' }
-];
-
-this.totalPrice=0;
-this.selectedName='all';
 this.filterList= this.productList;
 
+
 }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.filterByCategory();
+  }
 
 addProduct(inp:any , pro:Iproducts){
   if (!inp.value || inp.value <= 0) {
@@ -360,16 +367,17 @@ addProduct(inp:any , pro:Iproducts){
   this.totalPrice += inp.value * pro.price;
   pro.stock -= inp.value;
   inp.value=""
+  this.total.emit(this.totalPrice);
   this.toastr.success(`(${pro.title}) added successfully`);
 }
 
 filterByCategory(){
-  if(this.selectedName ==='all')
+  if(this.RecivedName ==='all')
   {
     this.filterList = this.productList;
   }
   else{
-    this.filterList=this.productList.filter(p=>p.category === this.selectedName) ;
+    this.filterList=this.productList.filter(p=>p.category === this.RecivedName) ;
   }
   
   

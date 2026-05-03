@@ -1,0 +1,23 @@
+ <div class="container my-3">
+  <h3 class="text-center fw-bold mb-3 text-primary">🛍️ Filter Products by Category</h3>
+  <div class="w-50 mx-auto shadow-sm p-2 rounded bg-light">
+    <select  class="form-select border-0"
+      [(ngModel)]="selectedName"
+       >
+      @for(cat of catList; track $index){
+        <option [value]="cat.name">{{ cat.name | titlecase }}</option>
+      }
+    </select>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center my-3">
+  <div class="card shadow-sm px-4 py-2">
+    <h5 class="text-success mb-0">
+      💰 Total Price:   {{ totalPrice > 0 ? (totalPrice | currency) : 'No purchases yet' }}
+
+    </h5>
+  </div>
+</div>
+
+<app-products [RecivedName]="selectedName" (total)="RecivedTotalPrice($event)"></app-products>
